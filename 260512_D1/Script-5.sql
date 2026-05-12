@@ -2,3 +2,5 @@ SELECT * FROM dual;  --query sql
 ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 CREATE USER scott IDENTIFIED BY tiger;
 GRANT CONNECT,resource TO scott;
+GRANT CREATE VIEW TO scott;
+GRANT unlimited TABLESPACE TO scott;

@@ -1,3 +1,4 @@
+--scott Connection
 SELECT * FROM emp; -- 테이블을 조회하는 명령어. / 우린 이제 CRUD를 한다. / 책에는 DESC emp; 하라고 되어 있는데 디비버에선 이게 안 된다.
 -- SELECT, INSERT, DELETE, update 이 네 가지를 DML이라고 부른다.(셀렉트 빼고 나머지를)
 SELECT empno, ename, job FROM EMP; -- 셀렉트 컬럼명 프롬 테이블명 이런 식으로.
@@ -71,3 +72,6 @@ SELECT ename, comm+1000 AS plus_comm FROM EMP;
 
 --null은 연산이 불가. / nvl은 함수다. (oracle에 함수가 엄청 많음.)
 SELECT ename, nvl(comm, 0)+1000 AS plus_comm FROM EMP;
+
+--강사님 문제 : 
+-- user db(아이디는 내 마음대로)를 하나 생성하시오 / 비밀번호는 1234 / 로그인되게 하시고 테이블 생성은 scott에 있는 걸로 진행

@@ -1,4 +1,4 @@
-SELECT * FROM dual;  --query sql
+SELECT * FROM dual;  --query sql / sys에서 진행
 ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 DROP USER scott CASCADE; -- 연결이 안 돼서 sys , sysdba? 설정해서 사용자를 지웠다.
 CREATE USER scott IDENTIFIED BY tiger;
