@@ -71,6 +71,3 @@ SELECT ename, comm+1000 AS plus_comm FROM EMP;
 
 --null은 연산이 불가. / nvl은 함수다. (oracle에 함수가 엄청 많음.)
 SELECT ename, nvl(comm, 0)+1000 AS plus_comm FROM EMP;
-
---강사님 문제 : 
--- user db(아이디는 내 마음대로)를 하나 생성하시오 / 비밀번호는 1234 / 로그인되게 하시고 테이블 생성은 scott에 있는 걸로 진행
