@@ -1,3 +1,4 @@
+--scott Connection
 SELECT * FROM emp; -- 테이블을 조회하는 명령어. / 우린 이제 CRUD를 한다. / 책에는 DESC emp; 하라고 되어 있는데 디비버에선 이게 안 된다.
 -- SELECT, INSERT, DELETE, update 이 네 가지를 DML이라고 부른다.(셀렉트 빼고 나머지를)
 SELECT empno, ename, job FROM EMP; -- 셀렉트 컬럼명 프롬 테이블명 이런 식으로.
