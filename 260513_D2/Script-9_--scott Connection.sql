@@ -11,10 +11,11 @@ SELECT ALL job, deptno FROM emp; -- 거의 사용하지 않음.
 -- 별칭(alias)를 정할 때는 AS를 쓴다. / 테이블 별칭은 emp 뒤에 쓰면 된다.
 SELECT ename AS name, sal*12 AS annsal FROM EMP;
 -- 중요함 => annsal 이렇게 하면 컬럼명 바뀜. 별명은 띄어쓰기 X OR 띄어쓸 거면 " "이렇게 문자열로 묶어야 함. / 연봉(sal이 월급)
-
---디센딩 어센딩(오름차순, 내림차순) 여기서 처리하면 굳이 java에서 Stream할 필요가 없음.
+--desc 기준값이 가장 큰 것부터 시작하여 점점 작아지도록 데이터를 나열 / '최신순'이나 '인기순'
+--asc 기준값이 가장 작은 것부터 시작하여 점점 커지도록 데이터를 나열
+--디센딩 어센딩(내림차순, 오름차순) 여기서 처리하면 굳이 java에서 Stream할 필요가 없음.
 --order by를 사용하면 정렬할 수 있음. => 순서 정하기 오름차순, 내림차순
-SELECT * FROM emp ORDER BY sal desc;--SELECT * FROM emp ORDER BY sal; 오름차순
+SELECT * FROM emp ORDER BY sal desc;--SELECT * FROM emp ORDER BY sal; 내림차순
 --1 empno 기준으로 내림차순 정렬
 SELECT * FROM emp ORDER BY empno DESC;
 SELECT ename, sal, deptno FROM emp ORDER BY deptno, sal desc;
