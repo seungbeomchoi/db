@@ -219,33 +219,79 @@ COMMIT;
 --------------------------------------------------
 
 -- 21. emp_copy에서 급여가 1000 미만인 사원을 삭제하시오.
-
+DELETE FROM emp_copy
+WHERE sal < 2000;--1000 넘는 사람이 많아서 2000으로 바꿈. update랑 delete는 무조건 where가 붙는다고 생각하면 된다.
+COMMIT;
 -- 22. emp_copy에서 커미션이 0인 사원을 삭제하시오.
+DELETE FROM emp_copy
+WHERE comm = 0;
+COMMIT;
+SELECT * FROM emp_copy;
+SELECT * FROM dept_copy;
 
 -- 23. dept_copy에서 60번 부서를 삭제하시오.
+DELETE FROM DEPT_COPY
+WHERE deptno = 60;
+COMMIT;
 
 -- 24. emp_copy에서 부서번호가 40번인 사원을 삭제하시오.
+delete FROM emp_copy
+WHERE deptno = 40;
 
 -- 25. emp_copy에서 평균 급여보다 적게 받는 사원을 삭제하시오.
 -- 서브쿼리 사용
+DELETE FROM EMP_COPY
+WHERE sal < (SELECT avg(sal) FROM emp_copy);
+COMMIT;
 
 -- 26. emp_copy에서 부서명이 RESEARCH인 부서의 사원을 삭제하시오.
 -- dept_copy 서브쿼리 사용
+DELETE FROM EMP_COPY 
+WHERE deptno = (SELECT deptno FROM DEPT_COPY WHERE dname = 'RESEARCH');
+
+--항목이 없어서 넣는다
+INSERT INTO emp_copy VALUES (9999,'JJANG','CEO',NULL,sysdate,9999,300,50);
+INSERT INTO dept_copy VALUES (50,'RESEARCH','ILSAN');
+COMMIT;
+DROP TABLE emp_copy;
+SELECT * FROM emp_copy;
+SELECT * FROM dept_copy;
+CREATE TABLE emp_copy AS SELECT * FROM emp; 
+DROP TABLE dept_copy dc;
+CREATE TABLE dept_copy AS SELECT * FROM dept;
+DELETE FROM dept_copy WHERE deptno = 50;
 
 -- 27. dept_copy에서 사원이 존재하지 않는 부서를 삭제하시오.
 -- NOT EXISTS 사용
+DELETE FROM DEPT_COPY d
+WHERE NOT EXISTS (SELECT * FROM emp_copy e WHERE e.deptno = d.deptno);
+
 
 -- 28. emp_copy에서 각 부서의 최저 급여자를 삭제하시오.
 -- 다중컬럼 서브쿼리 사용
+DELETE FROM EMP_COPY
+where(deptno,sal) IN
+	(SELECT deptno,min(sal) FROM emp_copy GROUP BY deptno);
 
 -- 29. emp_copy에서 관리자 역할을 하고 있는 사원은 제외하고 나머지 MANAGER 직무 사원을 삭제하시오.
 -- NOT IN 또는 NOT EXISTS 사용
+DELETE FROM emp_copy e
+WHERE e.job = 'MANAGER' AND NOT EXISTS 
+	(SELECT * FROM emp_copy m WHERE m.mgr = e.empno);
+COMMIT;
 
 -- 30. emp_copy에서 가장 오래전에 입사한 사원을 삭제하시오.
 -- 서브쿼리 사용
+DELETE FROM emp_copy WHERE hiredate = 
+	(SELECT min(hiredate) FROM emp_copy);
 
+SELECT * FROM emp_copy;
+COMMIT;
 
+--커밋과 롤백을 tcl이라고 함. tranction control language
+INSERT INTO emp_copy VALUES (9998,'JJANG','CEO',NULL,sysdate,9999,300,50);
+INSERT INTO emp_copy VALUES (9998,'JJANG','CEO',NULL,sysdate,9999,300,50);
 
-
-
+-- 보통의 DB는 한 줄에 대해서 lock (insert/update/delete)이 걸린다.
+-- 같은 row에 대해서는 commit하기 전에 접근이 되지 않는다.
 
