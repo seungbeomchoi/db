@@ -38,5 +38,43 @@ nocache
 nocycle;
 
 SELECT * FROM movie;
+-- 강사님 SQL 아래부터 복붙
+INSERT INTO movie VALUES (movie_seq.nextval,'범죄도시','N');
+INSERT INTO movie VALUES (movie_seq.nextval,'파묘','N');
+INSERT INTO movie VALUES (movie_seq.nextval,'왕과 사는 남자','N');
+
+UPDATE movie SET reserve_yn = 'Y' WHERE NO = 1;
+DELETE FROM movie WHERE NO = 1;
+ROLLBACK;
 
 COMMIT;
+
+-- hit는 조회수 컬럼, regdate는 글쓴 날짜
+-- 게시판 테이블 생성.
+DROP TABLE board;
+CREATE TABLE board (
+	NO NUMBER CONSTRAINT board_no_pk PRIMARY KEY,
+	title varchar2(300) CONSTRAINT board_title_nn NOT NULL,
+	nickname varchar2(300) CONSTRAINT board_nickname_nn NOT NULL,
+	content clob CONSTRAINT board_content_nn NOT NULL,
+	hit NUMBER DEFAULT 0,
+	regdate DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE board_seq
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 99999999999
+nocache
+nocycle;
+
+INSERT INTO 
+	board(no,title,content,nickname,regdate,hit) 
+	values(board_seq.nextval,'제목','내용','홍길동',sysdate,0);
+
+SELECT * FROM board;
+ROLLBACK;
+
+COMMIT;
+
+
