@@ -81,6 +81,7 @@ ROLLBACK;
 COMMIT;
 
 SELECT * FROM MEMBER;
+DROP TABLE MEMBER;
 CREATE TABLE member (
     no NUMBER CONSTRAINT member_no_pk PRIMARY KEY,
 
@@ -101,6 +102,10 @@ CREATE TABLE member (
 
     address VARCHAR2(300)
         CONSTRAINT member_address_nn NOT NULL,
+        
+    zipcode NUMBER,
+    
+    detail_address varchar2(300),
 
     reg_date TIMESTAMP DEFAULT SYSTIMESTAMP,
 
