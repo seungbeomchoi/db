@@ -82,38 +82,24 @@ COMMIT;
 
 SELECT * FROM MEMBER;
 DROP TABLE MEMBER;
+DELETE FROM MEMBER;
 CREATE TABLE member (
-    no NUMBER CONSTRAINT member_no_pk PRIMARY KEY,
-
-    user_id VARCHAR2(50)
-        CONSTRAINT member_user_id_nn NOT NULL,
-
-    user_name VARCHAR2(50)
-        CONSTRAINT member_user_name_nn NOT NULL,
-
-    user_pw VARCHAR2(100)
-        CONSTRAINT member_user_pw_nn NOT NULL,
-
-    email VARCHAR2(100)
-        CONSTRAINT member_email_nn NOT NULL,
-
-    phone VARCHAR2(20)
-        CONSTRAINT member_phone_nn NOT NULL,
-
-    address VARCHAR2(300)
-        CONSTRAINT member_address_nn NOT NULL,
-        
-    zipcode NUMBER,
-    
-    detail_address varchar2(300),
-
-    reg_date TIMESTAMP DEFAULT SYSTIMESTAMP,
-
-    CONSTRAINT member_user_id_uk UNIQUE (user_id),
-
-    CONSTRAINT member_email_uk UNIQUE (email)
+    no          	  NUMBER PRIMARY KEY,
+    user_id     	  VARCHAR2(100) NOT NULL UNIQUE,
+    user_name   	  VARCHAR2(100) NOT NULL,
+    user_pw     	  VARCHAR2(100) NOT NULL,
+    email       	  VARCHAR2(200) NOT NULL UNIQUE,
+    phone       	  VARCHAR2(30),
+    address     	  VARCHAR2(500),
+    zipcode     	  NUMBER,
+    detail_address 	  VARCHAR2(300),
+    profile 	      VARCHAR2(300),
+    thumbnail_profile VARCHAR2(300),
+    regdate			  DATE DEFAULT sysdate
 );
+COMMIT;
 
+ALTER TABLE MEMBER RENAME COLUMN reg_date TO regdate;
 
 CREATE SEQUENCE member_seq
 START WITH 1
@@ -131,3 +117,5 @@ ROLLBACK;
 COMMIT;
 
 SELECT count(*) FROM MEMBER WHERE user_id='aaa' AND user_pw='1234';
+SELECT user_id, user_name, zipcode, address, detail_address, regdate
+FROM MEMBER WHERE user_id = 'hong';
