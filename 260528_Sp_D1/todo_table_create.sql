@@ -119,3 +119,24 @@ COMMIT;
 SELECT count(*) FROM MEMBER WHERE user_id='aaa' AND user_pw='1234';
 SELECT user_id, user_name, zipcode, address, detail_address, regdate
 FROM MEMBER WHERE user_id = 'hong';
+
+
+
+CREATE TABLE new_member (
+    no          	  NUMBER PRIMARY KEY,
+    user_id     	  VARCHAR2(100) NOT NULL UNIQUE,
+    user_name   	  VARCHAR2(100) NOT NULL,
+    user_pw     	  VARCHAR2(100) NOT NULL,
+    email       	  VARCHAR2(200) NOT NULL UNIQUE,
+    phone       	  VARCHAR2(30),
+    address     	  VARCHAR2(500),
+    zipcode     	  NUMBER,
+    detail_address 	  VARCHAR2(300),
+    profile 	      VARCHAR2(300),
+    thumbnail_profile VARCHAR2(300),
+    regdate			  DATE DEFAULT sysdate
+);
+
+SELECT * FROM new_member;
+DELETE FROM new_member;
+COMMIT;
