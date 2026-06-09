@@ -137,6 +137,35 @@ CREATE TABLE new_member (
     regdate			  DATE DEFAULT sysdate
 );
 
+INSERT INTO new_member values(member_seq.nextval,'aaaa','장성호','1111',
+'jjang051@hanmail.net','01011111111','장항동',11111,'111-111','aaaaa','aaaaaaaa',sysdate);
+SELECT * FROM new_MEMBER WHERE user_id='jjang051' AND user_pw ='1234';
+ROLLBACK;
+COMMIT;
+SELECT * FROM new_member;
+
+
+DROP TABLE new_board;
+
+CREATE TABLE NEW_BOARD (
+    NO NUMBER CONSTRAINT new_BOARD_NO_PK PRIMARY KEY,
+    TITLE VARCHAR2(300) CONSTRAINT new_BOARD_TITLE_NN NOT NULL,
+    CONTENT CLOB CONSTRAINT new_BOARD_CONTENT_NN NOT NULL,
+    --NICKNAME VARCHAR2(100) CONSTRAINT new_BOARD_NICKNAME_NN NOT NULL,
+    hit NUMBER DEFAULT 0,
+    regdate DATE DEFAULT sysdate 
+);
+
+SELECT * FROM new_board;
+
+CREATE SEQUENCE new_BOARD_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 SELECT * FROM new_member;
 DELETE FROM new_member;
 COMMIT;
+
+SELECT * FROM new_board WHERE NO=1;
